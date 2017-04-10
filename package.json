@@ -1,0 +1,14 @@
+{
+  "name": "exo",
+  "version": "0.0.1",
+  "description": "exo Orsys Luxembourg",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Angular"
+  ],
+  "author": "Jean-Louis",
+  "license": "ISC"
+}

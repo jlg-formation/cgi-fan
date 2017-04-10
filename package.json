@@ -14,5 +14,8 @@
   "devDependencies": {
     "express": "4.15.2",
     "serve-index": "1.8.0"
+  },
+  "dependencies": {
+    "angular": "1.6.4"
   }
 }

@@ -10,5 +10,8 @@
     "Angular"
   ],
   "author": "Jean-Louis",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "express": "4.15.2"
+  }
 }

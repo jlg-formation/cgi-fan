@@ -21,26 +21,40 @@
 			restrict: 'E',
 			controller: function CgiListCtrl($scope, $element, $attrs, $compile, $rootScope) {
 				'ngInject';
+				var ctrl = this;
 				console.log('CgiListCtrl', arguments);
 				var content = $element.html();
 				$element.html('');
 
 				console.log('content', content);
 
+				ctrl.start = 0;
 
-				for (var i = 0; i < 10; i++) {
-					var html = '';
-					html += '<div>' + content + '</div>';
-					var elt = angular.element(html);
-					$element.append(elt);
-					var scope = $scope.$new(false);
-					var name = $attrs.name;
-					scope[name] = $rootScope.affaires[i];
-					$compile(elt)(scope);
+				window.onwheel = function() {
+					console.log('mon scroll', arguments);
+					ctrl.getMore();
+				};
+
+				ctrl.getMore = function() {
+					var qty = $attrs.qty || 10;
+					qty = Number(qty);
+
+
+					for (var i = ctrl.start; i < ctrl.start + qty; i++) {
+						var html = '';
+						html += '<div>' + content + '</div>';
+						var elt = angular.element(html);
+						$element.append(elt);
+						var scope = $scope.$new(false);
+						var name = $attrs.name;
+						scope[name] = $rootScope.affaires[i];
+						$compile(elt)(scope);
+					}
+					ctrl.start += qty;
+
 				}
+				ctrl.getMore();
 
-
-				
 			}
 		};
 	});

@@ -19,8 +19,28 @@
 	app.directive('cgiList', function() {
 		return {
 			restrict: 'E',
-			controller: function CgiListCtrl() {
+			controller: function CgiListCtrl($scope, $element, $attrs, $compile, $rootScope) {
+				'ngInject';
 				console.log('CgiListCtrl', arguments);
+				var content = $element.html();
+				$element.html('');
+
+				console.log('content', content);
+
+
+				for (var i = 0; i < 10; i++) {
+					var html = '';
+					html += '<div>' + content + '</div>';
+					var elt = angular.element(html);
+					$element.append(elt);
+					var scope = $scope.$new(false);
+					var name = $attrs.name;
+					scope[name] = $rootScope.affaires[i];
+					$compile(elt)(scope);
+				}
+
+
+				
 			}
 		};
 	});

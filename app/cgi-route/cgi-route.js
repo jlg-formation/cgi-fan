@@ -3,8 +3,12 @@
 
 	var app = angular.module('cgi-route', ['ui.router']);
 
-	app.config(function($stateProvider, $urlRouterProvider) {
+	app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 		'ngInject';
+
+		$locationProvider
+			.html5Mode(true);
+
 		var homeState = {
 			name: 'home',
 			url: '/',

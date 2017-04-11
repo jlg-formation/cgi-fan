@@ -3,7 +3,7 @@
 
 	var app = angular.module('cgi-route', ['ui.router']);
 
-	app.config(function($stateProvider) {
+	app.config(function($stateProvider, $urlRouterProvider) {
 		'ngInject';
 		var homeState = {
 			name: 'home',
@@ -33,6 +33,7 @@
 		$stateProvider.state(produitState);
 		$stateProvider.state(serviceState);
 		$stateProvider.state(contactState);
+		$urlRouterProvider.otherwise('/');
 	});
 
 })();

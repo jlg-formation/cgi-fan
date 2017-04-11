@@ -21,7 +21,7 @@
 				description: 'description' + i,
 			});
 		}
-		console.log('$rootScope.affaires', $rootScope.affaires);
+		// console.log('$rootScope.affaires', $rootScope.affaires);
 	});
 
 	app.directive('cgiList', function() {

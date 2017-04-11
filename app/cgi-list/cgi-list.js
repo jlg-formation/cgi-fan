@@ -33,9 +33,24 @@
 				window.onwheel = function() {
 					console.log('mon scroll', arguments);
 					ctrl.getMore();
+					$scope.$apply();
+				};
+
+				ctrl.$onInit = function() {
+					ctrl.lastCall = new Date();
+					ctrl.offset = 2;
 				};
 
 				ctrl.getMore = function() {
+					ctrl.now = new Date();
+					console.log('ctrl.lastCall', ctrl.lastCall);
+					console.log('ctrl.lastCall + ctrl.offset', ctrl.lastCall + ctrl.offset);
+					var d = new Date(ctrl.lastCall);
+					d.setSeconds(d.getSeconds() + ctrl.offset);
+					if (ctrl.now < d) {
+						return;
+					}
+					ctrl.lastCall = ctrl.now;
 					var qty = $attrs.qty || 10;
 					qty = Number(qty);
 

@@ -58,29 +58,30 @@ app.service('debounce', function Debounce() {
 });
 
 app.component('cgiList', {
-	bindings:{
-		href:'@',
-		qty:'@',
-		name:'@'
+	bindings: {
+		href: '@',
+		qty: '@',
+		name: '@',
+		kiki: '<?'
 	},
 	controller: function CgiListCtrl($scope,
 		$element, $compile, $rootScope, listeInfinie, debounce) {
 		'ngInject';
 		var ctrl = this;
 		console.log('CgiListCtrl', arguments);
-		var content = $element.html();
-		$element.html('');
-
-		console.log('content', content);
-
 
 		window.onwheel = function() {
 			console.log('mon scroll', arguments);
 			debounce.run('cgiList', ctrl.offset, ctrl.getMore);
 			$scope.$apply();
 		};
-
+		var content;
 		ctrl.$onInit = function() {
+			content = $element.html();
+			$element.html('kiki = |{{$ctrl.kiki}}|');
+			$compile($element.contents())($scope);
+
+			console.log('content', content);
 			ctrl.offset = 5000;
 			ctrl.start = 0;
 			ctrl.getMore();
@@ -103,7 +104,6 @@ app.component('cgiList', {
 				scope[name] = array[i];
 				$compile(elt)(scope);
 			}
-
 		}
 	}
 });

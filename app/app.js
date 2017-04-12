@@ -21,21 +21,12 @@ var cgiHeaderUrl = require('./tmpl/cgi-header.html');
 var cgiBodyUrl = require('./tmpl/cgi-body.html');
 var cgiFooterUrl = require('./tmpl/cgi-footer.html');
 
-app.directive('cgiHeader', function() {
-	return {
-		restrict: 'E',
-		templateUrl: cgiHeaderUrl,
-	};
+app.component('cgiHeader', {
+	templateUrl: cgiHeaderUrl,
 });
-app.directive('cgiBody', function() {
-	return {
-		restrict: 'E',
-		templateUrl: cgiBodyUrl,
-	};
+app.component('cgiBody', {
+	templateUrl: cgiBodyUrl,
 });
-app.directive('cgiFooter', function() {
-	return {
-		restrict: 'E',
-		templateUrl: cgiFooterUrl,
-	};
+app.component('cgiFooter', {
+	templateUrl: cgiFooterUrl,
 });

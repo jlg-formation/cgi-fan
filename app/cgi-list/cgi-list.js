@@ -52,6 +52,7 @@
 			if (map[name].lastCall > new Date().getTime() - offset) {
 				return;
 			}
+			map[name].lastCall = new Date().getTime();
 			callback();
 			return;
 		}
@@ -78,8 +79,9 @@
 				};
 
 				ctrl.$onInit = function() {
-					ctrl.offset = 0.5;
+					ctrl.offset = 5000;
 					ctrl.start = 0;
+					ctrl.getMore();
 				};
 
 				ctrl.getMore = function() {
@@ -101,7 +103,7 @@
 					}
 
 				}
-				ctrl.getMore();
+				
 
 			}
 		};

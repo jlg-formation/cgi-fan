@@ -36,7 +36,14 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 	var contactState = {
 		name: 'contact',
 		url: '/contact',
-		templateUrl: contactUrl
+		templateUrl: contactUrl,
+		controller: function($rootScope) {
+			'ngInject';
+			var ctrl = this;
+			ctrl.choses = $rootScope.choses;
+			ctrl.affaires = $rootScope.affaires;
+		},
+		controllerAs: '$ctrl'
 	}
 
 	$stateProvider.state(homeState);
@@ -70,4 +77,18 @@ app.controller('ProduitsCtrl', function ProduitsCtrl($http, $q) {
 			console.error('error', error);
 		});
 	};
+
+
+	
 });
+
+app.component('jlgList', {
+		bindings: {
+			type: '@',
+			filtre: '<'
+		},
+		controller: function() {
+			console.log('ctrl');
+		},
+		template: 'type={{$ctrl.type}}<div ng-repeat="obj in $root[$ctrl.type] | filter : {titre: $ctrl.filtre}">{{obj}}</div>'
+	});

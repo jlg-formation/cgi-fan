@@ -1,7 +1,10 @@
 Bienvenue <br/>
-<input type="text" ng-model="toto"/>
-<cgi-list href="../ws/affaires" qty="15" name="affaire" kiki="toto">
+<input type="text" ng-model="filtre"/>
+<cgi-list href="../ws/affaires" qty="15" name="affaire" kiki="toto" table-name="affaires">
 	<titre>{{affaire.titre}}</titre>
 	<description>{{affaire.description}}</description>
 </cgi-list>
-
+<cgi-list href="../ws/affaires" qty="15" name="affaire" kiki="toto" table-name="choses">
+	<titre>{{affaire.titre}}</titre>
+	<description>{{affaire.description}}</description>
+</cgi-list>

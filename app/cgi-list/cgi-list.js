@@ -13,11 +13,16 @@ app.run(function() {
 app.run(function($rootScope) {
 	'ngInject';
 	$rootScope.affaires = [];
+	$rootScope.choses = [];
 
-	for (var i = 0; i < 10000; i++) {
+	for (var i = 0; i < 2000; i++) {
 		$rootScope.affaires.push({
 			titre: 'coucou' + i,
 			description: 'description' + i,
+		});
+		$rootScope.choses.push({
+			titre: 'coucou' + i,
+			description: 'chose' + i,
 		});
 	}
 	// console.log('$rootScope.affaires', $rootScope.affaires);
@@ -25,13 +30,13 @@ app.run(function($rootScope) {
 
 app.service('listeInfinie', function ListeInfinie($rootScope) {
 	'ngInject';
-	this.getMore = function(start, qty) {
+	this.getMore = function(start, qty, tableName) {
 		qty = Number(qty);
 		if (isNaN(qty)) {
 			console.error('qty is not a number: ', qty);
 			return;
 		}
-		var result = $rootScope.affaires.slice(start, start + qty);
+		var result = $rootScope[tableName].slice(start, start + qty);
 		start += qty;
 		return result;
 	}
@@ -62,6 +67,7 @@ app.component('cgiList', {
 		href: '@',
 		qty: '@',
 		name: '@',
+		tableName: '@',
 		kiki: '<?'
 	},
 	controller: function CgiListCtrl($scope,
@@ -78,8 +84,8 @@ app.component('cgiList', {
 		var content;
 		ctrl.$onInit = function() {
 			content = $element.html();
-			$element.html('kiki = |{{$ctrl.kiki}}|');
-			$compile($element.contents())($scope);
+			$element.html('');
+			
 
 			console.log('content', content);
 			ctrl.offset = 5000;
@@ -92,7 +98,7 @@ app.component('cgiList', {
 			var qty = ctrl.qty || 10;
 			qty = Number(qty);
 
-			var array = listeInfinie.getMore(ctrl.start, qty);
+			var array = listeInfinie.getMore(ctrl.start, qty, ctrl.tableName);
 			ctrl.start += qty;
 			for (var i = 0; i < qty; i++) {
 				var html = '';
